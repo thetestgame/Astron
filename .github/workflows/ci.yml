@@ -6,7 +6,9 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - 'main'
+      - 'develop'
+      - 'staging'
+      - 'release'
 
 jobs:
   # Job to push the Docker image to multiple registries
@@ -28,6 +30,7 @@ jobs:
         with:
           images: |
             thetestgame/astron
+            ghcr.io/${{ github.repository }}
           tags: |
             type=schedule
             type=ref,event=branch
