@@ -11,7 +11,7 @@ Group, and used in-house from 2001 until 2013.
 The suite consists of many components, which handle separate tasks in order to distribute
 the workload of managing a multi-sharded game/application environment with many objects and clients.
 
-[![Build Status](https://travis-ci.org/Astron/Astron.svg?branch=master)](https://travis-ci.org/Astron/Astron)
+[![Build/Push Docker images](https://github.com/thetestgame/Astron/actions/workflows/ci.yml/badge.svg)](https://github.com/thetestgame/Astron/actions/workflows/ci.yml)
 
 ## Overview ##
 
