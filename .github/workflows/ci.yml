@@ -30,7 +30,6 @@ jobs:
         with:
           images: |
             thetestgame/astron
-            ghcr.io/${{ github.repository }}
           tags: |
             type=schedule
             type=ref,event=branch
