@@ -2,11 +2,11 @@
 name: Build/Push Docker images
 
 on:
-  # Trigger the workflow manually or when code is pushed to the 'master' branch
+  # Trigger the workflow manually or when code is pushed to the 'main' branch
   workflow_dispatch:
   push:
     branches:
-      - 'master'
+      - 'main'
 
 jobs:
   # Job to push the Docker image to multiple registries
@@ -28,7 +28,12 @@ jobs:
         with:
           images: |
             thetestgame/astron
-            ghcr.io/${{ github.repository }}
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=tag
+            type=ref,event=pr
+            type=raw,value=latest,enable={{is_default_branch}}
 
       # Step 3: Log in to DockerHub (only if not a pull request)
       - name: Login to DockerHub
