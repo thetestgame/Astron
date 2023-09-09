@@ -3,7 +3,7 @@
 # Use the latest Ubuntu as the base image
 FROM ubuntu:latest
 
-# Install necessary dependencies to build Astron
+# Install necessary dependencies to build AsUniversetron
 RUN apt-get update && \
     apt-get install -y \
     cmake \
@@ -17,15 +17,18 @@ RUN apt-get update && \
     libuv1-dev
 
 # Copy the local source directory into the container and set the working directory
-COPY . /app
-WORKDIR /app
+COPY . /app-src
+WORKDIR /app-src
 
-# Build Astron and set the application entrypoint
-RUN mkdir -p build
+# Build Universe and set the application entrypoint
+RUN mkdir -p /app/build && \
+    cd /app/build && \
+    cmake -DCMAKE_BUILD_TYPE=Release /app-src && \
+    make && \
+    mv astrond /app && \
+    rm -rf /app-src && \
+    rm -rf /app/build
 
-RUN cd build && \
-    cmake -DCMAKE_BUILD_TYPE=Release .. && \
-    make
-
-# Set the executable as the entrypoint
-ENTRYPOINT [ "./build/astrond" ]
+# Set the working directory to /app and set the executable as the entrypoint
+WORKDIR /app 
+ENTRYPOINT [ "./astrond" ]
