@@ -3,7 +3,7 @@
 # Use the latest Ubuntu as the base image
 FROM ubuntu:latest
 
-# Install necessary dependencies to build AsUniversetron
+# Install necessary dependencies to build Astron
 RUN apt-get update && \
     apt-get install -y \
     cmake \
@@ -20,10 +20,11 @@ RUN apt-get update && \
 COPY . /app-src
 WORKDIR /app-src
 
-# Build Universe and set the application entrypoint
+# Build Astron using the build type supplied as a build argument
+ARG BUILD_TYPE=Release
 RUN mkdir -p /app/build && \
     cd /app/build && \
-    cmake -DCMAKE_BUILD_TYPE=Release /app-src && \
+    cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} /app-src && \
     make && \
     mv astrond /app && \
     rm -rf /app-src && \
