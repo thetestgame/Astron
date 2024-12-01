@@ -2,13 +2,11 @@
 name: Build/Push Docker images
 
 on:
-  # Trigger the workflow manually or when code is pushed to the primary branchs
+  # Trigger the workflow manually or when code is pushed to the main branch
   workflow_dispatch:
   push:
     branches:
-      - 'develop'
-      - 'staging'
-      - 'release'
+      - 'main'
 
 jobs:
   # Job to push the release Docker image to multiple registries
@@ -36,6 +34,7 @@ jobs:
             type=ref,event=tag
             type=ref,event=pr
             type=raw,value=latest,enable={{is_default_branch}}
+            type=sha,enable={{is_default_branch}}
 
       # Load the secret from 1Password
       - name: Load secret
