@@ -30,6 +30,9 @@ RUN mkdir -p /app/build && \
     rm -rf /app-src && \
     rm -rf /app/build
 
-# Set the working directory to /app and set the executable as the entrypoint
+# Set the working directory to /app and set the startup script as the entrypoint
 WORKDIR /app 
-ENTRYPOINT [ "./astrond" ]
+COPY startup.sh .
+
+RUN chmod +x startup.sh
+ENTRYPOINT [ "./startup.sh" ]

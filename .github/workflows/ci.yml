@@ -2,7 +2,7 @@
 name: Build/Push Docker images
 
 on:
-  # Trigger the workflow manually or when code is pushed to the 'main' branch
+  # Trigger the workflow manually or when code is pushed to the primary branchs
   workflow_dispatch:
   push:
     branches:
